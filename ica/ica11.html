@@ -7,23 +7,37 @@
     <link rel="stylesheet" href="css/ica11.css">
 </head>
 <body>
+  <h1>Story Time</h1>
+  <p class="subtitle"> Funny random generated story! </p>
 
-<div>
-  <label for="custom-name">Enter custom name:</label>
-  <input id="custom-name" type="text" placeholder="" />
-</div>
+  <main class="container">
 
-<fieldset>
-  <legend>Choose locale:</legend>
-  <label for="us">US</label
-  ><input id="us" type="radio" name="uk-us" value="us" checked />
-  <label for="uk">UK</label
-  ><input id="uk" type="radio" name="uk-us" value="uk" />
-</fieldset>
+    <div>
+      <label for="custom-name">Enter your name:</label>
+      <input
+        id="custom-name"
+        type="text"
+        placeholder="Your name here..."
+      />
+    </div>
 
-<div>
-  <button class="generate">Generate random story</button>
-</div>
+    <fieldset>
+      <legend>Choose your locale:</legend>
+
+      <label for="us">US</label>
+      <input id="us" type="radio" name="uk-us"
+             value="us" checked />
+
+      <label for="uk">UK</label>
+      <input id="uk" type="radio" name="uk-us"
+             value="uk" />
+    </fieldset>
+
+    <div>
+      <button class="generate" type="button">Generate My Story!</button>
+    </div>
+
+    <p class="story" aria-live="polite"></p>
 
 <!-- Thanks a lot to Willy Aguirre for his help with the code for this assessment -->
 <p class="story"></p>
@@ -40,20 +54,23 @@ function randomValueFromArray(array) {
   return array[random];
 }
 
-// Willy the Goblin
-// Big Daddy
-// Father Christmas
-const characters = ["Willy the Goblin", "Big Daddy", "Father Christmas"];
+const characters = [
+  "a suspiciously fashionable raccoon",
+  "a retired disco queen",
+  "a dramatic talking flamingo"
+];
 
-// the soup kitchen
-// Disneyland
-// the White House
-const places = ["the soup kitchen", "Disneyland", "the White House"];
+const places = [
+  "a secret underground dance party",
+  "the world's fanciest grocery store",
+  "a mysterious pink castle"
+];
 
-// spontaneously combusted
-// melted into a puddle on the sidewalk
-// turned into a slug and slithered away
-const events = ["spontaneously combusted", "melted into a puddle on the sidewalk", "turned into a slug and slithered away"];
+const events = [
+  "challenged everyone to a dance battle",
+  "accidentally became the new president",
+  "revealed they were actually three squirrels in a trench coat"
+];
 
 // Partial return random string function
 
@@ -62,9 +79,15 @@ function returnRandomStoryString() {
   const randomPlace = randomValueFromArray(places);
   const randomEvent = randomValueFromArray(events);
 
-  // It was 94 Fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 pounds, and it was a hot day.
-  let storyText = 'It was 94 Fahrenheit outside, so ${randomCharacter} went for a walk. When they got to ${randomPlace}, they stared in horror for a few moments, then ${randomEvent}. Bob saw the whole thing, but was not surprised — ${randomCharacter} weighs 300 pounds, and it was a hot day.';
+  let storyText = `It was a scorching 94 Fahrenheit outside when Bob received a mysterious invitation from ${randomCharacter}. Naturally, Bob decided to investigate.
 
+    After traveling all the way to ${randomPlace}, things took a very unexpected turn. Without warning, ${randomCharacter} ${randomEvent}!
+
+    The crowd went absolutely wild. Someone dropped their iced coffee, a stranger started screaming, and Bob seriously questioned every life decision that led to this moment.
+
+    To make matters worse, a 300 pounds disco ball suddenly fell from the ceiling. Somehow, nobody was injured.
+
+    Bob decided it was officially time to go home.`;
   return storyText;
 }
 
@@ -77,7 +100,7 @@ function generateStory() {
 
   if (customName.value !== "") {
     const name = customName.value;
-    newStory = newStory.replace("Bob", name);
+    newStory = newStory.replaceAll("Bob", name);
   }
 
   if (document.getElementById("uk").checked) {
